@@ -1,0 +1,40 @@
+import os, sys
+VOXFORGE = "VOXFORGE"
+TATOEBA = "TATOEBA"
+
+CHINESE = "CHINESE"
+ENGLISH = "ENGLISH"
+FRENCH = "FRENCH"
+GERMAN = "GERMAN"
+RUSSIAN = "RUSSIAN"
+SHANGHANESE = "SHANGHANESE"
+SPANISH = "SPANISH"
+
+root = r"/Users/magusverma/Google Drive/ML Project/"
+
+DatasetFilesLocation = {
+    TATOEBA: {
+        CHINESE : root + "DATASET/chinese/audio.tatoeba.org/sentences/cmn",
+        ENGLISH : root + "DATASET/english/audio.tatoeba.org/sentences/eng",
+        FRENCH : root + "DATASET/french/audio.tatoeba.org/sentences/fra",
+        GERMAN : root + "DATASET/german/audio.tatoeba.org/sentences/deu",
+        RUSSIAN : root + "DATASET/russian/audio.tatoeba.org/sentences/rus",
+        SHANGHANESE : root + "DATASET/shangh/audio.tatoeba.org/sentences/wuu",
+        SPANISH : root + "DATASET/spanish/audio.tatoeba.org/sentences/spa"
+    },
+    VOXFORGE: {
+        ENGLISH : root + "ML_project/DATASET_VOXFORGE/english",
+        FRENCH : root + "ML_project/DATASET_VOXFORGE/french",
+        GERMAN : root + "ML_project/DATASET_VOXFORGE/german",
+        SPANISH : root + "ML_project/DATASET_VOXFORGE/spanish",
+    }
+}
+
+TATOEBA_LANGUAGES = DatasetFilesLocation[TATOEBA].keys()
+VOXFORGE_LANGUAGES = DatasetFilesLocation[VOXFORGE].keys()
+
+for dataset in DatasetFilesLocation.keys():
+    for language in DatasetFilesLocation[dataset].keys():
+        directory = DatasetFilesLocation[dataset][language]
+        file_count = len([item for item in os.listdir(directory) if os.path.isfile(os.path.join(directory, item))])
+        print ("Dataset: %s , Language = %s, Samples = %d" %(dataset,language, file_count))
